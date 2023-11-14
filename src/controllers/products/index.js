@@ -1,0 +1,14 @@
+const addProductController=require('./addProduct.controller')
+const deleteProductController=require('./deleteProduct.controller')
+const updateProductController=require('./updateProduct.controller')
+const getProductByIdController=require('./getProductById.controller')
+
+
+module.exports=dependancies=>{
+    return {
+        addProductController,
+        deleteProductController,
+        updateProductController,
+        getProductByIdController
+    }
+}
