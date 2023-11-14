@@ -16,6 +16,7 @@ module.exports=dependencies =>{
             }=req 
             const {id}=params
             const getUserById=getUserByIdUseCase(dependencies)
+            const response=await getUserById.execute({id})
             //https:§§domain/api/v1/users/:id
             res.json(new Response({
                 status:true,
