@@ -1,14 +1,43 @@
+const { Response} =require('../../frameworks/common')
+
 module.exports=dependencies =>{
     const {
-        productsRepository
+        useCases:{
+            products:{
+                updateProductUseCase
+            }
+        }
     }=dependencies
-    if(!productsRepository){
-        throw new Error('The users repository should be exist in dependancies')
+
+    return async (req,res,next)=>{
+        try{
+            const {body={}}=req 
+            const {
+                name,
+                description,
+                images,
+                price,
+                color,
+                meta
+            }=body 
+            const updateProduct=updateProductUseCase(dependencies)
+            const response=await updateProduct.execute({
+                product:{
+                    name,
+                    description,
+                    images,
+                    price,
+                    color,
+                    meta 
+                }
+            })
+            res.json(new Response({
+                status:true,
+                content:response
+            }))
+            next()
+        }catch(err){
+            next(err)
+        }
     }
-    const execute=({
-        user
-    })=>{
-        return productsRepository.update(user)
-    }
-    return { execute }
 }
