@@ -11,6 +11,7 @@ module.exports=dependencies =>{
 
     return async (req,res,next)=>{
         try{ 
+            console.log('fuck are you')
             const {
                 params={}
             }=req 

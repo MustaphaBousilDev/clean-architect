@@ -4,7 +4,7 @@ const updateUserController=require('./updateUser.controller')
 const getUserByIdController=require('./getUserById.controller')
 
 
-module.exports=dependancies=>{
+module.exports=dependencies=>{
     return {
         addUserController,
         deleteUserController,

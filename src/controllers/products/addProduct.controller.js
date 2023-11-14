@@ -1,17 +1,8 @@
 const { Response} =require('../../frameworks/common')
-
-module.exports=dependencies =>{
-    const {
-        useCases:{
-            user:{
-                addProductUseCase
-            }
-        }
-    }=dependencies
-
-    return async (req,res,next)=>{
+const {addProductUseCase} =require('../../useCases/products')
+module.exports=async (req,res)=>{
         try{
-            const {body={}}=req 
+            
             const {
                 name,
                 description,
@@ -19,23 +10,25 @@ module.exports=dependencies =>{
                 price,
                 color,
                 meta
-            }=body 
-            const addProduct=addProductUseCase(dependencies)
-            const response=await addProduct.execute({
+            }=req.body 
+            const useCaseInstance = addProductUseCase();
+            //const addProduct=addProductUseCase(dependencies)
+            const addProduct= await  useCaseInstance.execute({ 
                 name,
                 description,
                 images,
                 price,
                 color,
                 meta 
-            })
+             });
+            
             res.json(new Response({
                 status:true,
-                content:response
+                content:addProduct
             }))
             next()
         }catch(err){
             next(err)
         }
-    }
+    
 }

@@ -1,7 +1,8 @@
+const dependanciess=require('../../config/dependencies')
 module.exports=dependencies =>{
     const {
         usersRepository
-    }=dependencies
+    }=dependanciess
     if(!usersRepository){
         throw new Error('The users repository should be exist in dependancies')
     }

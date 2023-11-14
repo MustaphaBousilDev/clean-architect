@@ -1,9 +1,7 @@
 const {Product} =require('../../entities')
-
-module.exports=dependencies=>{
-    const {
-        productsRepository
-    }=dependencies
+const {productsRepository} =require('../../frameworks/repositories/inMemory')
+module.exports=()=>{
+    
 
     if(!productsRepository){
         throw new Error('productsRepository should be in dependencies')

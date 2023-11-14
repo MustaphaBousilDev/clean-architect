@@ -4,7 +4,7 @@ const updateProductController=require('./updateProduct.controller')
 const getProductByIdController=require('./getProductById.controller')
 
 
-module.exports=dependancies=>{
+module.exports=dependencies=>{
     return {
         addProductController,
         deleteProductController,

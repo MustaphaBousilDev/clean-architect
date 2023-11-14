@@ -3,7 +3,7 @@ const { Response} =require('../../frameworks/common')
 module.exports=dependencies =>{
     const {
         useCases:{
-            products:{
+            product:{
                 deleteProductUseCase
             }
         }
