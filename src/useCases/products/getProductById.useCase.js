@@ -2,7 +2,7 @@ module.exports=dependencies =>{
     const {
         productsRepository
     }=dependencies
-    if(!usersRepository){
+    if(!productsRepository){
         throw new Error('The users repository should be exist in dependancies')
     }
     const execute=({

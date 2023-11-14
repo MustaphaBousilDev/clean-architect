@@ -13,7 +13,8 @@ const {
 
 const {
     product:{
-        addProductUseCase
+        addProductUseCase,
+        getProductByIdUseCase
     }
 }=require('../../../src/useCases')
 
@@ -23,6 +24,17 @@ describe('Product use cases',()=>{
         add:jest.fn(async product=> ({
             ...product,
             id:uuidv4()
+        })),
+        getById:jest.fn(async id=>({
+            id,
+            name:chance.name(),
+            description:chance.sentence(),
+            images:[uuidv4(),uuidv4()],
+            price:chance.natural(),
+            color:chance.color(),
+            meta:{
+                comment:'the best product of the the marchy'
+            }
         }))
     }
     const dependancies={
@@ -58,6 +70,26 @@ describe('Product use cases',()=>{
             //check the call
             const expectedUserData=mockProductRepo.add.mock.calls[0][0]
             expect(expectedUserData).toEqual(testProduct)
+        })
+
+        test('get product by id useCase',async ()=>{
+            //create a fake id and call get by id use case
+            const fakeId=uuidv4()
+            const returnedProduct=await getProductByIdUseCase(dependancies).execute({
+                id:fakeId
+            })
+            //check that the data returned as expected 
+            expect(returnedProduct).toBeDefined()
+            expect(returnedProduct.id).toBeDefined()
+            expect(returnedProduct.name).toBeDefined()
+            expect(returnedProduct.description).toBeDefined()
+            expect(returnedProduct.images).toBeDefined()
+            expect(returnedProduct.price).toBeDefined()
+            expect(returnedProduct.color).toBeDefined()
+            expect(returnedProduct.meta).toBeDefined()
+            //check the mock call
+            const expectedId=mockProductRepo.getById.mock.calls[0][0]
+            expect(expectedId).toBe(fakeId)
         })
     })
 })
